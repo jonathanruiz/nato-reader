@@ -5,7 +5,10 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+<<<<<<< HEAD
 	"fmt"
+=======
+>>>>>>> b69aa4b4b9447304aa3e8d0c38e110af567397ab
 	"os"
 
 	"github.com/spf13/cobra"
@@ -19,7 +22,11 @@ var rootCmd = &cobra.Command{
 	With this application, you can output words that would best fit your country.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
+<<<<<<< HEAD
 	Run: func(cmd *cobra.Command, args []string) { fmt.Println("Hello Nato-Reader") },
+=======
+	// Run: func(cmd *cobra.Command, args []string) { },
+>>>>>>> b69aa4b4b9447304aa3e8d0c38e110af567397ab
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
