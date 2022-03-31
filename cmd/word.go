@@ -19,7 +19,7 @@ var wordCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		natoWord, _ := cmd.Flags().GetString("word")
 
-		fmt.Println(natoWord)
+		outputNatoWord(natoWord)
 	},
 }
 
@@ -29,4 +29,11 @@ func init() {
 	// This flag is where the user adds the word they are wanting to get a phonetic output
 	wordCmd.Flags().StringP("word", "w", "", "The word you are looking to get the phonetic output for")
 
+}
+
+// This outputs the word from the word flag
+func outputNatoWord(word string) {
+	for _, letter := range word {
+		fmt.Println(string(letter))
+	}
 }
