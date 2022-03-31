@@ -5,7 +5,6 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -14,12 +13,9 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "nato-reader",
-	Short: "Print out a phoenetic output of a word.",
-	Long: `Nato-Reader is a CLI tool for printing out a phonetic output of a word.
+	Short: "Print out a phoenetic output of a word or sentence.",
+	Long: `Nato-Reader is a CLI tool for printing out a phonetic output of a word or sentence.
 	With this application, you can output words that would best fit your country.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) { fmt.Println("Hello Nato-Reader!") },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
