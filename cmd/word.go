@@ -5,7 +5,9 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/spf13/cobra"
 )
@@ -33,7 +35,38 @@ func init() {
 
 // This outputs the word from the word flag
 func outputNatoWord(word string) {
+	// Object for each Nato letter
+	type Letter struct {
+		Letter string `json:"letter"`
+		Word   string `json:"word"`
+	}
+
+	// Open our jsonFile
+	content, err := ioutil.ReadFile("./json/nato.json")
+
+	// If we ioutil.ReadFile returns an error then handle it
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	// Create an array of empty Letter structs
+	var letters []Letter
+
+	// Parse json into array of Letter structs
+	err2 := json.Unmarshal(content, &letters)
+
+	// Error handling again
+	if err2 != nil {
+		fmt.Println("Error JSON Unmarshalling")
+		fmt.Println(err2.Error())
+	}
+
+	for _, x := range letters {
+		fmt.Println(x.Word)
+	}
+
 	for _, letter := range word {
+
 		fmt.Println(string(letter))
 	}
 }
