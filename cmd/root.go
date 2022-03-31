@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 	With this application, you can output words that would best fit your country.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) { fmt.Println("Hello Nato-Reader") },
+	Run: func(cmd *cobra.Command, args []string) { fmt.Println("Hello Nato-Reader!") },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
