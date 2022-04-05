@@ -54,6 +54,9 @@ func ConvertWord(word string) []string {
 
 // Outputs the word from the word flag
 func outputNatoWord(word string) {
+	// Create an array of empty Letter structs
+	var letters []Letter
+
 	// Open our jsonFile
 	content, err := ioutil.ReadFile("./json/nato.json")
 
@@ -61,9 +64,6 @@ func outputNatoWord(word string) {
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-
-	// Create an array of empty Letter structs
-	var letters []Letter
 
 	// Unmarshal the jsonFile into the Letter struct array
 	err2 := json.Unmarshal(content, &letters)
