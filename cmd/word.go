@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -25,6 +26,13 @@ var wordCmd = &cobra.Command{
 	},
 }
 
+// Struct for each Nato letter
+type Letter struct {
+	Letter string `json:"letter"`
+	Word   string `json:"word"`
+}
+
+// Execute adds all child commands to the root command and sets flags appropriately.
 func init() {
 	rootCmd.AddCommand(wordCmd)
 
@@ -33,14 +41,19 @@ func init() {
 
 }
 
-// This outputs the word from the word flag
-func outputNatoWord(word string) {
-	// Object for each Nato letter
-	type Letter struct {
-		Letter string `json:"letter"`
-		Word   string `json:"word"`
-	}
+// Converts the word to uppercase and creates an array of strings
+func ConvertWord(word string) []string {
 
+	// Create uppercase version of the word
+	var uppercaseWord string = strings.ToUpper(word)
+
+	// Create an array of strings
+	return strings.Split(uppercaseWord, "")
+
+}
+
+// Outputs the word from the word flag
+func outputNatoWord(word string) {
 	// Open our jsonFile
 	content, err := ioutil.ReadFile("./json/nato.json")
 
@@ -52,21 +65,26 @@ func outputNatoWord(word string) {
 	// Create an array of empty Letter structs
 	var letters []Letter
 
-	// Parse json into array of Letter structs
+	// Unmarshal the jsonFile into the Letter struct array
 	err2 := json.Unmarshal(content, &letters)
 
-	// Error handling again
+	// If we json.Unmarshal returns an error then handle it
 	if err2 != nil {
 		fmt.Println("Error JSON Unmarshalling")
 		fmt.Println(err2.Error())
 	}
 
-	for _, x := range letters {
-		fmt.Println(x.Word)
-	}
+	// Convert word to uppercase and create an array of strings
+	var wordArray = ConvertWord(word)
 
-	for _, letter := range word {
-
-		fmt.Println(string(letter))
+	// Loop through the wordArray
+	for _, character := range wordArray {
+		// Loop through the letters array
+		for _, letter := range letters {
+			// If the letter in the wordArray matches the letter in the letters array
+			if letter.Letter == character {
+				fmt.Println(letter.Letter + " as in " + letter.Word)
+			}
+		}
 	}
 }
