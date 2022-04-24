@@ -5,10 +5,20 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
+
+// Struct for each Nato letter
+type Letter struct {
+	Letter string `json:"letter"`
+	Word   string `json:"word"`
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -27,6 +37,54 @@ func Execute() {
 	}
 }
 
+// Converts the word to uppercase and creates an array of strings
+func convertWord(word string) []string {
+
+	// Create uppercase version of the word
+	var uppercaseWord string = strings.ToUpper(word)
+
+	// Create an array of strings
+	return strings.Split(uppercaseWord, "")
+
+}
+
+// Outputs the word from the word flag
+func outputNatoWord(word string, jsonFile string) {
+	// Create an array of empty Letter structs
+	var letters []Letter
+
+	// Open our jsonFile
+	content, err := ioutil.ReadFile(jsonFile)
+
+	// If we ioutil.ReadFile returns an error then handle it
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	// Unmarshal the jsonFile into the Letter struct array
+	err2 := json.Unmarshal(content, &letters)
+
+	// If we json.Unmarshal returns an error then handle it
+	if err2 != nil {
+		fmt.Println("Error JSON Unmarshalling")
+		fmt.Println(err2.Error())
+	}
+
+	// Convert word to uppercase and create an array of strings
+	var wordArray = convertWord(word)
+
+	// Loop through the wordArray
+	for _, character := range wordArray {
+		// Loop through the letters array
+		for _, letter := range letters {
+			// If the letter in the wordArray matches the letter in the letters array
+			if letter.Letter == character {
+				fmt.Println(letter.Letter + " as in " + letter.Word)
+			}
+		}
+	}
+}
+
 func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
@@ -38,3 +96,7 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+
+
+
