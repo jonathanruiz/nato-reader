@@ -22,6 +22,7 @@ var chaosCmd = &cobra.Command{
 	},
 }
 
+// Execute adds all child commands to the root command and sets flags appropriately.
 func init() {
 	rootCmd.AddCommand(chaosCmd)
 
