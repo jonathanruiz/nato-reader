@@ -20,6 +20,9 @@ type Letter struct {
 	Word   string `json:"word"`
 }
 
+var normalAlphabet string = "./json/nato.json"
+var chaosAlphabet string = "./json/chaos.json"
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "nato-reader",

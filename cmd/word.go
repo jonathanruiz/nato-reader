@@ -17,7 +17,7 @@ var wordCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		natoWord, _ := cmd.Flags().GetString("word")
 
-		var natoJson string = "./json/nato.json"
+		var natoJson string = normalAlphabet
 
 		outputNatoWord(natoWord, natoJson)
 	},

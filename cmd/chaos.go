@@ -16,7 +16,7 @@ var chaosCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		natoWord, _ := cmd.Flags().GetString("word")
 
-		var natoJson string = "./json/chaos.json"
+		var natoJson string = chaosAlphabet
 
 		outputNatoWord(natoWord, natoJson)
 	},
