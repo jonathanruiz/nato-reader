@@ -78,11 +78,16 @@ func outputNatoWord(word string, jsonFile string) {
 
 	// Loop through the wordArray
 	for _, character := range wordArray {
-		// Loop through the letters array
-		for _, letter := range letters {
-			// If the letter in the wordArray matches the letter in the letters array
-			if letter.Letter == character {
-				fmt.Println(letter.Letter + " as in " + letter.Word)
+		// If character is a space then print a line break
+		if character == " " {
+			fmt.Println("----------------")
+		} else {
+			// Loop through the letters array
+			for _, letter := range letters {
+				// If the letter in the wordArray matches the letter in the letters array
+				if letter.Letter == character {
+					fmt.Println(letter.Letter + " as in " + letter.Word)
+				}
 			}
 		}
 	}
@@ -99,7 +104,3 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-
-
-
-
